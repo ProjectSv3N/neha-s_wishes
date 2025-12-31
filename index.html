@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:radial-gradient(circle at top,#1b2735,#090a0f);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+}
+
+.container{
+    width:100%;
+    max-width:540px;
+    padding:20px;
+    text-align:center;
+    animation:fadeIn 1.5s ease;
+}
+
+h1{
+    font-size:2.2rem;
+    animation:glow 2.5s infinite alternate;
+}
+
+h2{
+    font-size:3rem;
+    color:#ffd700;
+    margin:10px 0;
+}
+
+p{
+    font-size:1.05rem;
+    line-height:1.7;
+    opacity:.95;
+}
+
+/* Input Section */
+.input-section{
+    margin-top:25px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    outline:none;
+    font-size:1rem;
+    margin-top:10px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 30px;
+    background:#ffd700;
+    border:none;
+    border-radius:25px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#ffea80;
+}
+
+/* Mystery Box */
+.mystery-box{
+    margin:30px auto 0;
+    width:150px;
+    height:150px;
+    background:linear-gradient(145deg,#ffd700,#ffae00);
+    border-radius:15px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#000;
+    cursor:pointer;
+    animation:pulse 1.5s infinite;
+}
+
+/* Wish Section */
+.wish-box{
+    margin-top:25px;
+    display:none;
+    animation:slideUp 1.2s ease;
+}
+
+.from{
+    margin-top:25px;
+    font-style:italic;
+    color:#a8d8ff;
+}
+
+/* Stars */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:.8;
+    animation:float 10s linear infinite;
+}
+
+/* Sparkle */
+.sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:gold;
+    border-radius:50%;
+    pointer-events:none;
+    animation:sparkle .8s forwards;
+}
+
+/* Animations */
+@keyframes glow{
+    from{ text-shadow:0 0 10px #ffffff55; }
+    to{ text-shadow:0 0 20px #ffd700aa; }
+}
+
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(20px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes slideUp{
+    from{ opacity:0; transform:translateY(15px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes float{
+    from{ transform:translateY(110vh); }
+    to{ transform:translateY(-10vh); }
+}
+
+@keyframes sparkle{
+    to{ transform:scale(2); opacity:0; }
+}
+
+@keyframes pulse{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
+}
+
+/* Mobile */
+@media(max-width:480px){
+    h1{ font-size:1.9rem; }
+    h2{ font-size:2.6rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎉 Happy New Year ✨</h1>
+    <h2>2026</h2>
+
+    <!-- Section 1 -->
+    <div class="input-section">
+        <p><strong>Enter your name</strong></p>
+        <input type="text" id="userName" placeholder="Your name">
+        <button onclick="showMystery()">Continue</button>
+    </div>
+
+    <!-- Section 2: Mystery Box -->
+    <div class="mystery-box" id="mysteryBox" onclick="openWish()">
+        🎁<br>Tap Me
+    </div>
+
+    <!-- Section 3: Wish -->
+    <div class="wish-box" id="wishBox">
+        <p id="wishText"></p>
+    </div>
+
+    <div class="from">— With warm wishes from <strong>Neha</strong></div>
+</div>
+
+<script>
+/* Floating stars */
+for(let i=0;i<80;i++){
+    const star=document.createElement("div");
+    star.className="star";
+    star.style.left=Math.random()*100+"vw";
+    star.style.animationDuration=(5+Math.random()*10)+"s";
+    star.style.opacity=Math.random();
+    document.body.appendChild(star);
+}
+
+let savedName="";
+
+/* Step 1 → Show mystery box */
+function showMystery(){
+    const name=document.getElementById("userName").value.trim();
+    if(name===""){
+        alert("Please enter your name 😊");
+        return;
+    }
+    savedName=name;
+    document.getElementById("mysteryBox").style.display="flex";
+}
+
+/* Step 2 → Reveal wish */
+function openWish(){
+    const wish=document.getElementById("wishText");
+    wish.innerHTML=`
+    <strong>Happy New Year 🎉✨ ${savedName}</strong><br><br>
+    May this new year bring you happiness, good health, success, and peace 🌸💫.
+    May all your dreams slowly turn into reality and every day be filled with smiles 😊🌈.
+    Wishing you a year full of positivity, growth, and beautiful moments 💖🥂.
+    `;
+    document.getElementById("wishBox").style.display="block";
+}
+
+/* Sparkle click effect */
+document.addEventListener("click",e=>{
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=e.clientX+"px";
+    s.style.top=e.clientY+"px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+});
+</script>
+
+</body>
+</html>
